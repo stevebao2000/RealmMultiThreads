@@ -20,7 +20,7 @@ public class RealmUtil {
         try (Realm realm = Project.getInstance().getRealm()) {
             DataObj data = realm.where(DataObj.class).findFirst();
             if (data == null) {
-                final DataObj newData = DataUtil.getNewData();
+                final DataObj newData = DataUtil.createNewData();
 
                 realm.executeTransaction((realm1) -> {
                     realm1.copyToRealmOrUpdate(newData);

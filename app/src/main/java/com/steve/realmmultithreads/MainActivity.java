@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         // Initialize the Realm.
-        Project.init(getApplicationContext());
+        Project.init(this.button.getContext().getApplicationContext());
 
         testRealmDatabaseAsync();
     }
@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void testRealmDatabaseAsync() {
 
-//        Project.getInstance().startRealm();
         DataObj data1 = DataUtil.safeLoadData();
         // bala bala
 
@@ -54,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
         DataObj data2 = DataUtil.safeLoadData();
         // bala bala
 
-//         wrong way:
+//        Wrong way:
 //        data2.setB(3);
 //        DataUtil.safeSaveData(data2);
 
-        // Right way:
+        // Correct way:
         DataQuery query2 = new DataQuery();
         query2.setValueA(3);
         DataUtil.updateDataQuery(query2);

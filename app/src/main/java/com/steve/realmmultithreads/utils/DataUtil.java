@@ -6,7 +6,7 @@ import com.steve.realmmultithreads.models.DataQuery;
 public class DataUtil {
 
     // Set initial value when create a new data object.
-    public static DataObj getNewData() {
+    public static DataObj createNewData() {
         DataObj data = new DataObj();
         data.setId(1L);
         data.setA(2);
