@@ -5,6 +5,7 @@ import com.steve.realmmultithreads.models.DataObj;
 
 import io.realm.Realm;
 
+// If you use Kotlin, make this class object.
 public class RealmUtil {
     private static final String TAG = "RealmUtil";
     static volatile RealmUtil instance = null;
