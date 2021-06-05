@@ -21,7 +21,7 @@ public class TestData {
      */
     public static void testRealmDatabaseMultiThreads() {
         // In the real multi-threads case, only small chance for this thing happens.
-        // We mimic the case here:
+        // We mimic the case here: (Also has unit tests included)
         DataUtil.safeDeleteData();
         /**
          * case: 2 threads load the DataObj, make change of the data and save at same time:
