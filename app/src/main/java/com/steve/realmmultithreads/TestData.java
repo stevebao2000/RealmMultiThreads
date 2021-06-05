@@ -19,7 +19,9 @@ public class TestData {
      * 4. You might get a = 2 and b = 1 because the first save(thread 2) has been over written by second save(thread 1).
      * 5. In this project, you will get correct result: a = 2 and b = 3.
      */
-    public static void testRealmDatabaseAsync() {
+    public static void testRealmDatabaseMultiThreads() {
+        // In the real multi-threads case, only small chance for this thing happens.
+        // We mimic the case here:
         DataUtil.safeDeleteData();
         /**
          * case: 2 threads load the DataObj, make change of the data and save at same time:
