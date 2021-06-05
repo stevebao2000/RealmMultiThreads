@@ -11,14 +11,19 @@ public class DataObj extends RealmObject {
     private Long id;
 
     // suppose a and b >= 0;
-    private int a = 0;
-    private int b = 0;
+    private int a = AppConstants.invalidvalue;
+    private int b = AppConstants.invalidvalue;
+    private int amount = 0;
 
     public void setId(Long id) {
         if (this.id != null) {
             throw new RuntimeException("id can not be changed");
         }
         this.id = id;
+    }
+
+    public void increaseAmount(int increment) {
+        amount += increment;
     }
 
     public Long getId() {
@@ -39,6 +44,10 @@ public class DataObj extends RealmObject {
 
     public void setB(int b) {
         this.b = b;
+    }
+
+    public String to_string() {
+        return "a = " + a + ", b = " + b + ", amount = " + amount;
     }
 }
 

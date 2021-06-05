@@ -1,8 +1,9 @@
 package com.steve.realmmultithreads.models;
 
 public class DataQuery {
-    private int valueA = -1;
-    private int valueB = -1;
+    private int valueA = AppConstants.invalidvalue;
+    private int valueB = AppConstants.invalidvalue;
+    private int increment = AppConstants.invalidvalue;
 
     public void setValueA(int valueA) {
         this.valueA = valueA;
@@ -12,10 +13,18 @@ public class DataQuery {
         this.valueB = valueB;
     }
 
+    public void setIncrement(int increment) {
+        this.increment = increment;
+    }
+
     public void updateQuery(DataObj data) {
-        if (valueA >= 0)
+        if (valueA != AppConstants.invalidvalue)
             data.setA(valueA);
-        if (valueB >= 0)
+
+        if (valueB != AppConstants.invalidvalue)
             data.setB(valueB);
+
+        if (increment != AppConstants.invalidvalue)
+            data.increaseAmount(increment);
     }
 }

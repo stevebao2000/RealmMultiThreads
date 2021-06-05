@@ -9,7 +9,7 @@ public class RealmUtil {
     private static final String TAG = "RealmUtil";
     static volatile RealmUtil instance = null;
 
-    public RealmUtil getInstance() {
+    public static RealmUtil getInstance() {
         if (instance == null) {
             instance = new RealmUtil();
         }
@@ -20,12 +20,7 @@ public class RealmUtil {
         try (Realm realm = Project.getInstance().getRealm()) {
             DataObj data = realm.where(DataObj.class).findFirst();
             if (data == null) {
-                final DataObj newData = DataUtil.createNewData();
-
-                realm.executeTransaction((realm1) -> {
-                    realm1.copyToRealmOrUpdate(newData);
-                });
-                return newData;
+                return DataUtil.createNewData();
             }
             return realm.copyFromRealm(data);
         }
@@ -37,6 +32,17 @@ public class RealmUtil {
             realm.executeTransaction((realm1) -> {
                 realm1.copyToRealmOrUpdate(data);
             });
+        }
+    }
+
+    public synchronized void deleteData() {
+        try (Realm realm = Project.getInstance().getRealm()) {
+            DataObj data = realm.where(DataObj.class).findFirst();
+            if (data != null) {
+                realm.executeTransaction((realm1) -> {
+                    realm1.deleteAll();
+                });
+            }
         }
     }
 }

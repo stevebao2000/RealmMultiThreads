@@ -9,18 +9,23 @@ public class DataUtil {
     public static DataObj createNewData() {
         DataObj data = new DataObj();
         data.setId(1L);
-        data.setA(2);
-        data.setB(2);
+        data.setA(0);
+        data.setB(0);
+        data.increaseAmount(0);
         return data;
     }
 
     public static DataObj safeLoadData() {
         // If you call RealmUtil().loadData() is not thread safe.
-        return RealmUtil.instance.loadData();
+        return RealmUtil.getInstance().loadData();
     }
 
     public static void safeSaveData(DataObj data) {
-        RealmUtil.instance.saveData(data);
+        RealmUtil.getInstance().saveData(data);
+    }
+
+    public static void safeDeleteData() {
+        RealmUtil.getInstance().deleteData();
     }
 
     public static void updateDataQuery(DataQuery query) {

@@ -24,51 +24,12 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testRealmDatabaseAsync();
+                TestData.testRealmDatabaseAsync();
             }
         });
         // Initialize the Realm.
         Project.init(this.button.getContext().getApplicationContext());
 
-        testRealmDatabaseAsync();
-    }
-
-
-    /**
-     * Multithreads is a big problem for many people. We can test that in this small project, the problem is resolved.
-     * 1. Suppose we have threads: 1 and 2
-     *    Thread 1 load DataObj(a = 1 and b = 1) and doing something.
-     *    Then thread 2 load DataObj (a = 1 and b = 1).
-     * 2. Thread 2 update the value b = 2, then save.
-     * 3. Therad 1 finished some work and update value b = 3, then save.
-     * 4. You might get a = 2 and b = 1 because the first save(thread 2) has been over written by second save(thread 1).
-     * 5. In this project, you will get correct result: a = 2 and b = 3.
-     */
-    private void testRealmDatabaseAsync() {
-
-        DataObj data1 = DataUtil.safeLoadData();
-        // bala bala
-
-        // Thread 2:
-        DataObj data2 = DataUtil.safeLoadData();
-        // bala bala
-
-//        Wrong way:
-//        data2.setB(3);
-//        DataUtil.safeSaveData(data2);
-
-        // Correct way:
-        DataQuery query2 = new DataQuery();
-        query2.setValueA(3);
-        DataUtil.updateDataQuery(query2);
-
-        // Thread 1:
-        DataQuery query1 = new DataQuery();
-        query1.setValueA(2);
-        DataUtil.updateDataQuery(query1);
-
-        DataObj data = DataUtil.safeLoadData();
-        // the final result should be a = 2 and b = 3.
-        Log.v(TAG, "Value a = " + data.getA() + ", value b = " + data.getB());
+//        testRealmDatabaseAsync(); // Can not test here. It take sometime to init the realm.
     }
 }
