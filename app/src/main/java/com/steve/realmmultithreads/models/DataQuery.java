@@ -13,8 +13,8 @@ public class DataQuery {
         this.valueB = valueB;
     }
 
-    public void setIncrement(int increment) {
-        this.increment = increment;
+    public void setIncrement(int incrementValue) {
+        this.increment = incrementValue;
     }
 
     public void updateQuery(DataObj data) {

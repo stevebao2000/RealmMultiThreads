@@ -1,17 +1,17 @@
 package com.steve.realmmultithreads.utils;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.runner.AndroidJUnit4;
 import com.steve.realmmultithreads.models.DataObj;
 import com.steve.realmmultithreads.models.DataQuery;
+import com.steve.realmmultithreads.repository.RealmSetup;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import io.realm.Realm;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
@@ -20,8 +20,8 @@ public class DataUtilAndroidTest {
 
     @Before
     public void setUp() throws Exception {
-        mContext = InstrumentationRegistry.getInstrumentation().getContext();
-        Realm.init(mContext);
+        mContext = ApplicationProvider.getApplicationContext();
+        RealmSetup.init(mContext);
     }
 
     @After
@@ -60,10 +60,12 @@ public class DataUtilAndroidTest {
 
         DataQuery query2 = new DataQuery();
         query2.setValueB(3);
+        DataUtil.updateDataQuery(query2);
 
         DataObj newData = DataUtil.safeLoadData();
         // The value a = 2.
         assertEquals(newData.getA(), 2);
+        assertEquals(newData.getB(), 3);
     }
 
     @Test
@@ -78,6 +80,7 @@ public class DataUtilAndroidTest {
 
         DataQuery query2 = new DataQuery();
         query2.setIncrement(3);
+        DataUtil.updateDataQuery(query2);
 
         DataObj newData = DataUtil.safeLoadData();
         // The amount = 2 + 3.
