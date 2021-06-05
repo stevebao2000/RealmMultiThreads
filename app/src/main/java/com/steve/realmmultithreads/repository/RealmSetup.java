@@ -1,31 +1,28 @@
-package com.steve.realmmultithreads;
+package com.steve.realmmultithreads.repository;
 
 import android.content.Context;
-import android.print.PrintJob;
-
-import com.steve.realmmultithreads.repository.ProjectModules;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class Project {
+public class RealmSetup {
     private static final String TAG = "Project";
-    private static Project instance = null;
+    private static RealmSetup instance = null;
     private Context context = null;
     private Realm realm;
     private final RealmConfiguration realmConfiguration;
 
-    public static Project getInstance() {
+    public static RealmSetup getInstance() {
         return instance;
     }
 
     public static void init(Context mContext) {
         if (null == instance) {
-            instance = new Project(mContext);
+            instance = new RealmSetup(mContext);
         }
     }
 
-    private Project(Context mcontext) {
+    private RealmSetup(Context mcontext) {
         this.context = mcontext;
 
         Realm.init(context);

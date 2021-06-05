@@ -38,6 +38,10 @@ public class DataObj extends RealmObject {
         return b;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     public void setA(int a) {
         this.a = a;
     }
